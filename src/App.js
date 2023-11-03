@@ -52,7 +52,7 @@ const App = () => {
 
       const imageBase64 = canvasRef.current.toDataURL("image/png");
 
-      await fetch("https://localhost:3002/api/post_image", {
+      await fetch("https://merndemoapi.project-demo.info:3002/api/post_image", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -74,7 +74,7 @@ const App = () => {
   const handleFacebookShare = (TheImg) => {
     window.open(
       "http://www.facebook.com/sharer.php?u=" +
-        `https://localhost:3002/uploads/${imageUrlFromBackend}`
+        `https://merndemoapi.project-demo.info:3002/uploads/${imageUrlFromBackend}`
     );
   };
 
