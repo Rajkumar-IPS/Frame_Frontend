@@ -126,15 +126,13 @@ const App = () => {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body">
+            <div className="modal-body d-flex justify-content-center">
               <div
                 class="spinner-border"
                 style={{
                   width: "3rem",
                   height: "3rem",
                   display: !loading ? "none" : "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
                 }}
                 role="status"
               >
