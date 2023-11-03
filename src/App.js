@@ -7,6 +7,8 @@ const App = () => {
   const canvasRef = useRef(null);
 
   const [video, setVideo] = useState(false);
+  const [loading, setLoading] = useState(false);
+  console.log("loading: ", loading);
 
   const [imageBase64Data, setImageBase64Data] = useState();
   const [imageUrlFromBackend, setImageUrlFromBackend] = useState("");
@@ -27,6 +29,8 @@ const App = () => {
 
   const captureImage = async () => {
     if (mediaStream) {
+      setLoading(true);
+
       const context = canvasRef.current.getContext("2d");
 
       const centerX = (canvasRef.current.width - videoRef.current.width) / 2;
@@ -67,14 +71,20 @@ const App = () => {
           console.error(error);
         });
 
-      setImageBase64Data(imageBase64);
+      setLoading(false);
     }
   };
 
-  const handleFacebookShare = (TheImg) => {
+  const hashtags = ["#NEW", "#Demo", "#SocialMedia"];
+
+  const encodedHashtags = hashtags
+    .map((tag) => `hashtag=${encodeURIComponent(tag)}`)
+    .join("&");
+
+  const handleFacebookShare = () => {
     window.open(
       "http://www.facebook.com/sharer.php?u=" +
-        `https://merndemoapi.project-demo.info:3002/uploads/${imageUrlFromBackend}`
+        `https://merndemoapi.project-demo.info:3002/uploads/${imageUrlFromBackend}&hashtag=${encodedHashtags}`
     );
   };
 
@@ -117,17 +127,36 @@ const App = () => {
               ></button>
             </div>
             <div className="modal-body">
-              <canvas
-                ref={canvasRef}
-                style={{ width: "100%", height: "500px" }}
-              />
-              <p>#NEW #NEWPROFILE #TOP #ENJOY</p>
+              <div
+                class="spinner-border"
+                style={{
+                  width: "3rem",
+                  height: "3rem",
+                  display: !loading ? "none" : "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+                role="status"
+              >
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <div style={{ display: loading ? "none" : "block" }}>
+                <canvas
+                  ref={canvasRef}
+                  style={{
+                    width: "100%",
+                    height: "500px",
+                  }}
+                />
+                <p>#NEW #NEWPROFILE #TOP #ENJOY</p>
+              </div>
             </div>
             <div className="modal-footer">
               <button
                 type="button"
-                className="capture-btn"
-                onClick={() => handleFacebookShare(imageBase64Data)}
+                className={loading ? "btn btn-secondary btn-lg" : "capture-btn"}
+                onClick={() => handleFacebookShare()}
+                disabled={loading}
               >
                 POST
               </button>
