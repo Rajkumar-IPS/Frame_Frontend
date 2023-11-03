@@ -146,7 +146,7 @@ const App = () => {
                     height: "500px",
                   }}
                 />
-                <p>#NEW #NEWPROFILE #TOP #ENJOY</p>
+                <p>#SocialMedia</p>
               </div>
             </div>
             <div className="modal-footer">
