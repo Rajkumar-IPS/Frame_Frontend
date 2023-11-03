@@ -6,15 +6,19 @@ const App = () => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
 
-  const [imageBase64Data, setImageBase64Data] = useState();
+  const [video, setVideo] = useState(false);
 
-  let mediaStream = null;
+  const [imageBase64Data, setImageBase64Data] = useState();
+  const [imageUrlFromBackend, setImageUrlFromBackend] = useState("");
+
+  var mediaStream = null;
 
   const openCamera = async () => {
     try {
       mediaStream = await navigator.mediaDevices.getUserMedia({
         video: { facingMode: "environment" },
       });
+
       videoRef.current.srcObject = mediaStream;
     } catch (error) {
       console.error(error);
@@ -48,31 +52,29 @@ const App = () => {
 
       const imageBase64 = canvasRef.current.toDataURL("image/png");
 
+      await fetch("https://localhost:3002/api/post_image", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ image: imageBase64 }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setImageUrlFromBackend(data?.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
       setImageBase64Data(imageBase64);
     }
   };
 
-  const b64toBlob = (b64Data, contentType = "image/png", sliceSize = 512) => {
-    const byteCharacters = atob(b64Data.replace("data:image/png;base64,", ""));
-    const byteArrays = [];
-    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-      const slice = byteCharacters.slice(offset, offset + sliceSize);
-      const byteNumbers = new Array(slice.length);
-      for (let i = 0; i < slice.length; i++) {
-        byteNumbers[i] = slice.charCodeAt(i);
-      }
-      const byteArray = new Uint8Array(byteNumbers);
-      byteArrays.push(byteArray);
-    }
-    const blob = new Blob(byteArrays, { type: contentType });
-    return blob;
-  };
-
   const handleFacebookShare = (TheImg) => {
-    const bloburl = URL.createObjectURL(b64toBlob(TheImg));
-
     window.open(
-      "http://www.facebook.com/sharer.php?u=" + encodeURIComponent(bloburl)
+      "http://www.facebook.com/sharer.php?u=" +
+        `https://localhost:3002/uploads/${imageUrlFromBackend}`
     );
   };
 
@@ -83,6 +85,7 @@ const App = () => {
       </button>
 
       <video ref={videoRef} autoPlay className="my-5" />
+
       <button
         onClick={captureImage}
         className="capture-btn"
