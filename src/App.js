@@ -87,7 +87,7 @@ const App = () => {
     );
   };
 
-  const handleInstagramShare = () => {
+  const handleInstagramShare = async () => {
     // window.open(
     //   "http://www.instagram.com/sharer.php?u=" +
     //     encodeURIComponent(
@@ -98,10 +98,17 @@ const App = () => {
     //   `instagram://library?AssetPath=${encodeURIComponent(imageUrlFromBackend)}`
     // );
 
-    navigator.canShare({
-      file: `https://merndemoapi.project-demo.info:3002/uploads/${imageUrlFromBackend}`,
-      title: "Images",
-    });
+    const shareData = {
+      title: "MDN",
+      text: "Learn web development on MDN!",
+      file: "https://developer.mozilla.org",
+    };
+
+    try {
+      await navigator.share(shareData);
+    } catch (error) {
+      console.log(`Error: ${error.message}`);
+    }
   };
 
   const handleTwitterShare = () => {
