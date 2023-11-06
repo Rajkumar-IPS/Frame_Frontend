@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import "./App.css";
-import atob from "atob";
 
 const App = () => {
   const videoRef = useRef(null);
@@ -75,7 +74,7 @@ const App = () => {
     }
   };
 
-  const hashtags = ["#NEW", "#Demo", "#SocialMedia"];
+  const hashtags = ["#SocialMedia"];
 
   const encodedHashtags = hashtags
     .map((tag) => `hashtag=${encodeURIComponent(tag)}`)
@@ -90,11 +89,14 @@ const App = () => {
 
   const handleInstagramShare = () => {
     window.open(
-      "https://www.instagram.com/sharer.php?u=" +
-        `https://merndemoapi.project-demo.info:3002/uploads/${encodeURIComponent(
-          imageUrlFromBackend
-        )}&caption=${encodedHashtags}`
+      "http://www.instagram.com/sharer.php?u=" +
+        encodeURIComponent(
+          `https://merndemoapi.project-demo.info:3002/uploads/${imageUrlFromBackend}&caption=${encodedHashtags}`
+        )
     );
+    // window.open(
+    //   `instagram://library?AssetPath=${encodeURIComponent(imageUrlFromBackend)}`
+    // );
   };
 
   return (
