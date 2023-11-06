@@ -89,11 +89,12 @@ const App = () => {
   };
 
   const handleInstagramShare = () => {
-    window.open(
-      "instagram://library?AssetPath=" +
-        `https://merndemoapi.project-demo.info:3002/uploads/${imageUrlFromBackend}`,
-      "_blank"
-    );
+    // window.open(
+    //   "instagram://library?AssetPath=" +
+    //     `https://merndemoapi.project-demo.info:3002/uploads/${imageUrlFromBackend}`,
+    //   "_blank"
+    // );
+    window.open(`tel:${"091123456789"}`);
   };
 
   return (
