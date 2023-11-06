@@ -99,6 +99,15 @@ const App = () => {
     // );
   };
 
+  const handleTwitterShare = () => {
+    window.open(
+      "https://twitter.com/intent/tweet?text=Check%20out%20this%20cool%20image&url=https%3A%2F%2Fexample.com%2Fyour-image.jpg"
+    );
+    // window.open(
+    //   `instagram://library?AssetPath=${encodeURIComponent(imageUrlFromBackend)}`
+    // );
+  };
+
   return (
     <div className="App">
       <button onClick={openCamera} className="capture-btn">
@@ -184,6 +193,18 @@ const App = () => {
                 disabled={loading}
               >
                 <img src="/instagram.png" style={{ height: "3rem" }} />
+              </button>
+              <button
+                type="button"
+                className={
+                  loading
+                    ? "btn btn-secondary btn-lg"
+                    : "bg-transparent  border-0"
+                }
+                onClick={() => handleTwitterShare()}
+                disabled={loading}
+              >
+                <img src="/twitter.png" style={{ height: "3rem" }} />
               </button>
             </div>
           </div>
