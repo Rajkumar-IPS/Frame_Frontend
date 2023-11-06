@@ -101,7 +101,11 @@ const App = () => {
 
   const handleTwitterShare = () => {
     window.open(
-      "https://twitter.com/intent/tweet?text=Check%20out%20this%20cool%20image&url=https%3A%2F%2Fexample.com%2Fyour-image.jpg"
+      "https://twitter.com/intent/tweet?" +
+        encodeURIComponent(
+          "text=Check out this cool image #CoolImage #Awesome&url=" +
+            `https://merndemoapi.project-demo.info:3002/uploads/${imageUrlFromBackend}`
+        )
     );
     // window.open(
     //   `instagram://library?AssetPath=${encodeURIComponent(imageUrlFromBackend)}`
