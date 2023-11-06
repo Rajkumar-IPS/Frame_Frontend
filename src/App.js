@@ -88,15 +88,20 @@ const App = () => {
   };
 
   const handleInstagramShare = () => {
-    window.open(
-      "http://www.instagram.com/sharer.php?u=" +
-        encodeURIComponent(
-          `https://merndemoapi.project-demo.info:3002/uploads/${imageUrlFromBackend}&caption=${encodedHashtags}`
-        )
-    );
+    // window.open(
+    //   "http://www.instagram.com/sharer.php?u=" +
+    //     encodeURIComponent(
+    //       `https://merndemoapi.project-demo.info:3002/uploads/${imageUrlFromBackend}&caption=${encodedHashtags}`
+    //     )
+    // );
     // window.open(
     //   `instagram://library?AssetPath=${encodeURIComponent(imageUrlFromBackend)}`
     // );
+
+    navigator.canShare({
+      file: `https://merndemoapi.project-demo.info:3002/uploads/${imageUrlFromBackend}`,
+      title: "Images",
+    });
   };
 
   const handleTwitterShare = () => {
