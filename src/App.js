@@ -91,7 +91,8 @@ const App = () => {
   const handleInstagramShare = () => {
     window.open(
       "instagram://library?AssetPath=" +
-        `https://merndemoapi.project-demo.info:3002/uploads/${imageUrlFromBackend}`
+        `https://merndemoapi.project-demo.info:3002/uploads/${imageUrlFromBackend}`,
+      "_blank"
     );
   };
 
