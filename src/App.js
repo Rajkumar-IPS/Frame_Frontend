@@ -88,6 +88,13 @@ const App = () => {
     );
   };
 
+  const handleInstagramShare = () => {
+    window.open(
+      "instagram://library?AssetPath=" +
+        `https://merndemoapi.project-demo.info:3002/uploads/${imageUrlFromBackend}`
+    );
+  };
+
   return (
     <div className="App">
       <button onClick={openCamera} className="capture-btn">
@@ -152,11 +159,27 @@ const App = () => {
             <div className="modal-footer">
               <button
                 type="button"
-                className={loading ? "btn btn-secondary btn-lg" : "capture-btn"}
+                className={
+                  loading
+                    ? "btn btn-secondary btn-lg"
+                    : "bg-transparent  border-0"
+                }
                 onClick={() => handleFacebookShare()}
                 disabled={loading}
               >
-                POST
+                <img src="/facebook.png" style={{ height: "3rem" }} />
+              </button>
+              <button
+                type="button"
+                className={
+                  loading
+                    ? "btn btn-secondary btn-lg"
+                    : "bg-transparent  border-0"
+                }
+                onClick={() => handleInstagramShare()}
+                disabled={loading}
+              >
+                <img src="/instagram.png" style={{ height: "3rem" }} />
               </button>
             </div>
           </div>
