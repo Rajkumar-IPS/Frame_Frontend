@@ -103,12 +103,12 @@ const App = () => {
     window.open(
       "https://twitter.com/intent/tweet?" +
         `text=${encodeURIComponent(
-          `Check out this cool image #CoolImage #Awesome&url=https://merndemoapi.project-demo.info:3002/uploads/${imageUrlFromBackend}`
+          "Check out this cool image #CoolImage #Awesome"
+        )}` +
+        `&url=${encodeURIComponent(
+          `https://merndemoapi.project-demo.info:3002/uploads/${imageUrlFromBackend}`
         )}`
     );
-    // window.open(
-    //   `instagram://library?AssetPath=${encodeURIComponent(imageUrlFromBackend)}`
-    // );
   };
 
   return (
