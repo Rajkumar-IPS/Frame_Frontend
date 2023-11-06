@@ -94,7 +94,7 @@ const App = () => {
     //     `https://merndemoapi.project-demo.info:3002/uploads/${imageUrlFromBackend}`,
     //   "_blank"
     // );
-    window.open(`tel:${"091123456789"}`);
+    window.open(`com.instagram.share`);
   };
 
   return (
