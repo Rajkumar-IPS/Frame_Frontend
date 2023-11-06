@@ -90,8 +90,10 @@ const App = () => {
 
   const handleInstagramShare = () => {
     window.open(
-      "https://www.instagram.com?u=" +
-        `https://merndemoapi.project-demo.info:3002/uploads/${imageUrlFromBackend}&caption=#SocialMedia`
+      "https://www.instagram.com/sharer.php?u=" +
+        `https://merndemoapi.project-demo.info:3002/uploads/${encodeURIComponent(
+          imageUrlFromBackend
+        )}&caption=${encodedHashtags}`
     );
   };
 
